@@ -3,28 +3,23 @@ pipeline {
     environment {
       GOCACHE = "${env.WORKSPACE}/.build_cache"
     }
-    options {
-        buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
-        timeout(time: 1, unit: 'HOURS')
-        timestamps()
-    }
     stages {
         stage('Source') {
             steps {
-                sh 'which go'
-                sh 'go version'
+                bat 'which go'
+                bat 'go version'
                 git branch: 'stable',
                     url: 'https://github.com/ManjunathTN/pipeline-job.git'
             }
         }
         stage('Build') {
             steps {
-                sh "go build --tags extended"
+                bat "go build --tags extended"
             }
         }
         stage('Test') {
             steps {
-                sh './hugo env'
+                bat './hugo env'
             }
         }
     }

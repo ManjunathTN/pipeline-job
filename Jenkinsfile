@@ -14,7 +14,7 @@ pipeline {
                 sh 'which go'
                 sh 'go version'
                 git branch: 'stable',
-                   https://github.com/ManjunathTN/pipeline-job.git
+                    url: 'https://github.com/ManjunathTN/pipeline-job.git'
             }
         }
         stage('Build') {
